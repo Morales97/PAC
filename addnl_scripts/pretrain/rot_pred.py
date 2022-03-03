@@ -3,7 +3,7 @@ import sys
 from collections import OrderedDict
 
 sys.path.append(os.path.abspath('..'))
-sys.path.insert(0, 'home/danmoral/PAC')
+sys.path.insert(0, '/home/danmoral/PAC')
 
 import torch
 import torch.nn as nn
