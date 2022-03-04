@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 sys.path.append(os.path.abspath('..'))
 sys.path.insert(0, '/home/danmoral/PAC')
+import pdb
 
 import torch
 import torch.nn as nn
@@ -53,6 +54,8 @@ def main(args, wandb):
 
     torch.backends.cudnn.benchmark = True
     torch.set_num_threads(args.max_num_threads)
+    pdb.set_trace()
+
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
     random.seed(args.seed)
