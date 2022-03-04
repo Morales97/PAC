@@ -3,9 +3,9 @@
 #SBATCH --job-name=pretrain
 #SBATCH --output=res_pretrain.txt
 #
-#SBATCH --ntasks=3
+#SBATCH --ntasks=1
 #SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:0
 
 
 srun hostname
