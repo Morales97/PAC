@@ -5,7 +5,7 @@
 #
 #SBATCH --ntasks=1
 #SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:3
 
 
 srun hostname
