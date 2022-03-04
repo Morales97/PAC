@@ -163,7 +163,7 @@ def main(args, wandb):
         scaler.step(optimizer_f)
         scaler.update()
 
-        print(step)
+        print(step, end=' ')
         if step % args.log_interval == 0:
             log_info = OrderedDict({
                 'Train Step': step,
