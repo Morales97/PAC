@@ -54,7 +54,7 @@ def main(args, wandb):
 
     torch.backends.cudnn.benchmark = True
     torch.set_num_threads(args.max_num_threads)
-    pdb.set_trace()
+    # pdb.set_trace()
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
@@ -163,6 +163,7 @@ def main(args, wandb):
         scaler.step(optimizer_f)
         scaler.update()
 
+        print(step)
         if step % args.log_interval == 0:
             log_info = OrderedDict({
                 'Train Step': step,
