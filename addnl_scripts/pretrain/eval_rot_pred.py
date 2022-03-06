@@ -81,7 +81,7 @@ def main(args, wandb):
                 'Path for backbone {} not found'.format(backbone_path))
 
     G.eval()
-    F.eval()
+    F2.eval()
 
     with torch.no_grad():
         acc_s, acc_t = validate(G, F2, source_loader, target_loader)
@@ -110,4 +110,4 @@ if __name__ == '__main__':
 
     wandb.join()
 
-# python addnl_scripts/pretrain/eval_rot_pred.py --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --use_wandb 
+# python addnl_scripts/pretrain/eval_rot_pred.py --batch_size=16 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --use_wandb &
