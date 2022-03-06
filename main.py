@@ -24,7 +24,7 @@ from utils.loss import entropy, adentropy
 from utils.loss import vat_loss
 from utils.lr_schedule import inv_lr_scheduler
 from utils.return_dataset import return_dataset
-
+import wandb
 
 def main(args, wandb):
     if args.fs_ss:
@@ -281,4 +281,4 @@ if __name__ == '__main__':
     main(args, wandb)
     wandb.join()
 
-# python main.py --steps=501 --dataset=multi --source=real --target=sketch --backbone=expts/rot_pred/checkpoint.pth.tar --vat_tw=0 --expt_name=
+# python main.py --steps=501 --dataset=multi --source=real --target=sketch --backbone=expts/rot_pred/checkpoint.pth.tar --vat_tw=0 --expt_name=run1 &
