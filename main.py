@@ -268,15 +268,17 @@ if __name__ == '__main__':
     args = parse_args()
 
     # W&B logging setup
-    wandb = WandbWrapper(debug=~args.use_wandb)
+    #wandb = WandbWrapper(debug=~args.use_wandb)
     if not args.expt_name:
         args.expt_name = gen_unique_name()
     if args.project == '':
-        args.project = 'ssda_mme'
+        args.project = 'PAC_train'
+        entity = 'morales97'
     wandb.init(name=args.expt_name, dir=args.save_dir,
-               config=args, reinit=True, project=args.project)
+               config=args, reinit=True, project=args.project, entity=entity)
 
     os.makedirs(args.save_dir, exist_ok=True)
     main(args, wandb)
     wandb.join()
 
+# python main.py --steps=501 --dataset=multi --source=real --target=sketch --backbone=expts/rot_pred/checkpoint.pth.tar --vat_tw=0 --expt_name=
