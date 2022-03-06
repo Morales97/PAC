@@ -39,7 +39,7 @@ def get_parser():
                         help='wandb project to use')
     parser.add_argument('--save_dir', type=str, default='expts/tmp_last',
                         help='dir to save experiment results to')
-    parser.add_argument('--save_model', action='store_true', default=False,
+    parser.add_argument('--save_model', action='store_true', default=True,
                         help='If not set, model will not be saved')
     parser.add_argument('--seed', type=int, default=1, metavar='S',
                         help='random seed (default: 1)')

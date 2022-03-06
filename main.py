@@ -251,14 +251,20 @@ def main(args, wandb):
                         os.path.join(args.save_dir, 'model-best.pth.tar'))
                 best_acc = acc_val
                 best_acc_test = acc_test
+                
+                # DM. save model as wandb artifact
+                model_artifact = wandb.Artifact('best_model_{}'.format(step), type='model')
+                model_artifact.add_file(os.path.join(args.save_dir, 'checkpoint.pth.tar'))
+                wandb.log_artifact(model_artifact)
+
 
             log_info = OrderedDict({
                 'Train Step': step,
-                'Best Acc Val': FormattedLogItem(best_acc, '{:.2f}'),
-                'Best Acc Test': FormattedLogItem(best_acc_test, '{:.2f}'),
-                'Current Acc Val': FormattedLogItem(acc_val, '{:.2f}'),
+                'Best Acc Val (target)': FormattedLogItem(best_acc, '{:.2f}'),
+                'Best Acc Test (target)': FormattedLogItem(best_acc_test, '{:.2f}'),
+                'Current Acc Val (target)': FormattedLogItem(acc_val, '{:.2f}'),
                 # logging since it is computed anyway
-                'Current Acc Test': FormattedLogItem(acc_test, '{:.2f}')
+                'Current Acc Test (target)': FormattedLogItem(acc_test, '{:.2f}')
             })
             log_str = get_log_str(args, log_info, title='Validation Log')
             print(log_str)
