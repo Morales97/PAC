@@ -89,7 +89,6 @@ def main(args, wandb):
         acc_s, acc_t = validate(G, F2, source_loader, target_loader)
 
     log_info = OrderedDict({
-        'Train Step': step,
         'Source Acc': FormattedLogItem(100. * acc_s, '{:.2f}'),
         'Target Acc': FormattedLogItem(100. * acc_t, '{:.2f}')
     })
