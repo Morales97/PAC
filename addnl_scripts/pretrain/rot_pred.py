@@ -25,6 +25,7 @@ import numpy as np
 import random
 from torch.cuda.amp import GradScaler
 from torch.cuda.amp import autocast
+import wandb
 
 
 def validate(G, F2, loader_s, loader_t):
@@ -207,8 +208,7 @@ if __name__ == '__main__':
     args = parse_args()
     os.makedirs(args.save_dir, exist_ok=True)
 
-    pdb.set_trace()
-    wandb = WandbWrapper(~args.use_wandb)
+    # wandb = WandbWrapper(~args.use_wandb)
     if not args.project:
         #args.project = 'ssda_mme-addnl_scripts'
         args.project = 'PAC_pretrain'
