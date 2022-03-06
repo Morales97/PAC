@@ -58,7 +58,6 @@ def main(args, wandb):
 
     torch.backends.cudnn.benchmark = True
     torch.set_num_threads(args.max_num_threads)
-    # pdb.set_trace()
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
