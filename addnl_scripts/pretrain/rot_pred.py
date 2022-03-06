@@ -36,6 +36,7 @@ def validate(G, F2, loader_s, loader_t):
     accs = [acc_s, acc_t]
     loaders = [loader_s, loader_t]
 
+    '''
     torch.backends.cudnn.benchmark = False
     for lidx, loader in enumerate(loaders):
         for i, data in enumerate(loader):
@@ -46,6 +47,8 @@ def validate(G, F2, loader_s, loader_t):
             accs[lidx].update(
                 (preds == rot_labels).sum()/float(len(imgs)), len(imgs))
     torch.backends.cudnn.benchmark = True
+    '''
+    return 0, 0
     return acc_s.avg, acc_t.avg
 
 def main(args, wandb):
@@ -164,7 +167,6 @@ def main(args, wandb):
         scaler.step(optimizer_f)
         scaler.update()
 
-        print(step, end=' ')
         if step % args.log_interval == 0:
             log_info = OrderedDict({
                 'Train Step': step,
