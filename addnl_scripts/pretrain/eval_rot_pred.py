@@ -80,7 +80,9 @@ def main(args, wandb):
             raise Exception(
                 'Path for backbone {} not found'.format(backbone_path))
 
+    G.cuda()
     G.eval()
+    F2.cuda()
     F2.eval()
 
     with torch.no_grad():
