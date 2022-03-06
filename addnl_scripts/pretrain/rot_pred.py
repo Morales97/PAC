@@ -205,6 +205,13 @@ def main(args, wandb):
                     os.path.join(
                         args.save_dir, 'checkpoint_{}.pth.tar'.format(step)))
 
+                # DM. save model as wandb artifact
+                path_save_model = os.path.join(args.save_dir, 'G_state_dict.pth')
+                torch.save(G.state_dict(), path_save_model)
+                model_artifact = wandb.Artifact('model_{}'.format(step), type='model')
+                model_artifact.add_file(path_save_model)
+                wandb.log_artifact(model_artifact)
+
 
 if __name__ == '__main__':
     args = parse_args()
