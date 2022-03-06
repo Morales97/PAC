@@ -209,9 +209,11 @@ if __name__ == '__main__':
 
     wandb = WandbWrapper(~args.use_wandb)
     if not args.project:
-        args.project = 'ssda_mme-addnl_scripts'
+        #args.project = 'ssda_mme-addnl_scripts'
+        args.project = 'PAC_pretrain'
+        entity = 'morales97'
     wandb.init(name=args.expt_name, dir=args.save_dir,
-               config=args, reinit=True, project=args.project)
+               config=args, reinit=True, project=args.project, entity=entity)
     main(args, wandb)
 
     wandb.join()
