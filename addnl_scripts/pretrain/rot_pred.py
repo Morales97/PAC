@@ -220,7 +220,7 @@ if __name__ == '__main__':
     args = parse_args()
     os.makedirs(args.save_dir, exist_ok=True)
 
-    wandb = WandbWrapper(~args.use_wandb)
+    #wandb = WandbWrapper(~args.use_wandb)
     if not args.project:
         #args.project = 'ssda_mme-addnl_scripts'
         args.project = 'PAC_pretrain'
@@ -231,4 +231,4 @@ if __name__ == '__main__':
 
     wandb.join()
 
-# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=expt3 --use_wandb --ckpt_freq=1 --pre_trained=False
+# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=no_pretrain --ckpt_freq=1 --pre_trained=False &
