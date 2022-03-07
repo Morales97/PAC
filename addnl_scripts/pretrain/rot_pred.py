@@ -4,6 +4,8 @@ from collections import OrderedDict
 
 sys.path.append(os.path.abspath('..'))
 sys.path.insert(0, '/home/danmoral/PAC')
+sys.path.insert(0, '/Users/dani/Google Drive/My Drive/Uni/Master/EPFL/Thesis/Few Shot Domain Adaptation/repos/PAC_local')
+
 import pdb
 
 import torch
@@ -26,6 +28,7 @@ import random
 from torch.cuda.amp import GradScaler
 from torch.cuda.amp import autocast
 import wandb
+from torchsummary import summary
 
 
 def validate(G, F2, loader_s, loader_t):
@@ -68,7 +71,7 @@ def main(args, wandb):
 
     # Training settings
     if args.net == 'resnet34':
-        G = resnet34()
+        G = resnet34(pretrained=False)
         # num input channels/input dim
         inc = 512
     elif args.net == 'alexnet':
@@ -80,6 +83,7 @@ def main(args, wandb):
     else:
         raise ValueError('Model cannot be recognized.')
 
+    #pdb.set_trace()
     G.cuda()
     G.train()
 
@@ -216,7 +220,7 @@ if __name__ == '__main__':
     args = parse_args()
     os.makedirs(args.save_dir, exist_ok=True)
 
-    # wandb = WandbWrapper(~args.use_wandb)
+    wandb = WandbWrapper(~args.use_wandb)
     if not args.project:
         #args.project = 'ssda_mme-addnl_scripts'
         args.project = 'PAC_pretrain'
@@ -226,3 +230,5 @@ if __name__ == '__main__':
     main(args, wandb)
 
     wandb.join()
+
+# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=601 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=expt3 --use_wandb --ckpt_freq=1

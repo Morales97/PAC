@@ -121,6 +121,10 @@ def get_parser():
     parser.add_argument('--momentum', type=float, default=0.999,
                         help='Momentum for MoCo')
 
+    # DM
+    parser.add_argument('--pre_trained', type=boolfromstr, default=True,
+                        help='Use IN pretrained weights')
+
     return parser
 
 def post_process_args(args):
