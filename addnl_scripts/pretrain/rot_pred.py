@@ -13,7 +13,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 from model.basenet import AlexNetBase, VGGBase, Predictor
-from model.resnet import resnet34
+from model.resnet import resnet34, resnet34_seg
 from utils.ioutils import FormattedLogItem
 from utils.ioutils import get_log_str
 from utils.ioutils import parse_args
@@ -71,7 +71,8 @@ def main(args, wandb):
 
     # Training settings
     if args.net == 'resnet34':
-        G = resnet34(pretrained=args.pre_trained)
+        #G = resnet34(pretrained=args.pre_trained)
+        G = resnet34_seg(pretrained=args.pre_trained)
         # num input channels/input dim
         inc = 512
     elif args.net == 'alexnet':
@@ -83,7 +84,7 @@ def main(args, wandb):
     else:
         raise ValueError('Model cannot be recognized.')
 
-    #pdb.set_trace()
+    pdb.set_trace()
     G.cuda()
     G.train()
 
@@ -225,12 +226,12 @@ if __name__ == '__main__':
         #args.project = 'ssda_mme-addnl_scripts'
         args.project = 'PAC_pretrain'
         entity = 'morales97'
-    wandb.init(name=args.expt_name, dir=args.save_dir,
-               config=args, reinit=True, project=args.project, entity=entity)
+    #wandb.init(name=args.expt_name, dir=args.save_dir,
+    #           config=args, reinit=True, project=args.project, entity=entity)
     main(args, wandb)
 
-    wandb.join()
+    #wandb.join()
 
-# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=no_pretrain --ckpt_freq=1 --pre_trained=False &
+# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=resnet_seg --ckpt_freq=1 --pre_trained=True &
 # python addnl_scripts/pretrain/rot_pred.py --resume=expts/rot_pred/checkpoint_2000.pth.tar --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=no_pretrain --ckpt_freq=1 --pre_trained=False &
 
