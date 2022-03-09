@@ -23,7 +23,7 @@ from utils.return_dataset import return_dataset_pretrain
 from utils.misc import AverageMeter
 from utils.ioutils import WandbWrapper
 import shutil
-import numpy as np
+#import numpy as np
 import random
 from torch.cuda.amp import GradScaler
 from torch.cuda.amp import autocast
@@ -63,7 +63,7 @@ def main(args, wandb):
     torch.set_num_threads(args.max_num_threads)
 
     torch.manual_seed(args.seed)
-    np.random.seed(args.seed)
+    #np.random.seed(args.seed)
     random.seed(args.seed)
 
     source_loader, target_loader, class_list = return_dataset_pretrain(args)

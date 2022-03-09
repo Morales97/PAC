@@ -3,7 +3,7 @@ import random
 import shutil
 from collections import OrderedDict
 
-import numpy as np
+#import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -34,7 +34,7 @@ def main(args, wandb):
 
     # set random seed
     torch.manual_seed(args.seed)
-    np.random.seed(args.seed)
+    #np.random.seed(args.seed)
     random.seed(args.seed)
     source_loader, target_loader, target_loader_unl, target_loader_val, \
         target_loader_test, class_list = return_dataset(args)
