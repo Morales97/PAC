@@ -1,5 +1,10 @@
 #!/bin/bash
 #
+#SBATCH --job-name=pretrain
+#
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 
