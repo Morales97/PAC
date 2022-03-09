@@ -21,14 +21,14 @@ from utils.ioutils import rm_format
 from utils.lr_schedule import inv_lr_scheduler
 from utils.return_dataset import return_dataset_pretrain
 from utils.misc import AverageMeter
-from utils.ioutils import WandbWrapper
+#from utils.ioutils import WandbWrapper
 import shutil
 #import numpy as np
 import random
 from torch.cuda.amp import GradScaler
 from torch.cuda.amp import autocast
-import wandb
-from torchsummary import summary
+#import wandb
+#from torchsummary import summary
 
 
 def validate(G, F2, loader_s, loader_t):
@@ -54,7 +54,7 @@ def validate(G, F2, loader_s, loader_t):
     return 0, 0
     return acc_s.avg, acc_t.avg
 
-def main(args, wandb):
+def main(args): # main(args, wandb):
     if args.fs_ss:
         print('Setting sharing strategy to file_system')
         torch.multiprocessing.set_sharing_strategy('file_system')
@@ -176,7 +176,7 @@ def main(args, wandb):
                 'Train Step': step,
                 'Loss': FormattedLogItem(loss.item(), '{:.6f}'),
             })
-            wandb.log(rm_format(log_info))
+            #wandb.log(rm_format(log_info))
             log_str = get_log_str(args, log_info, title='Training Log')
             print(log_str)
 
@@ -189,7 +189,7 @@ def main(args, wandb):
                 'Source Acc': FormattedLogItem(100. * acc_s, '{:.2f}'),
                 'Target Acc': FormattedLogItem(100. * acc_t, '{:.2f}')
             })
-            wandb.log(rm_format(log_info))
+            #wandb.log(rm_format(log_info))
             log_str = get_log_str(args, log_info, title='Validation Log')
             print(log_str)
             G.train()
@@ -209,12 +209,7 @@ def main(args, wandb):
                     os.path.join(
                         args.save_dir, 'checkpoint_{}.pth.tar'.format(step)))
 
-                # DM. save model as wandb artifact
-                path_save_model = os.path.join(args.save_dir, 'G_state_dict.pth')
-                torch.save(G.state_dict(), path_save_model)
-                model_artifact = wandb.Artifact('model_{}'.format(step), type='model')
-                model_artifact.add_file(path_save_model)
-                wandb.log_artifact(model_artifact)
+
 
 
 if __name__ == '__main__':
@@ -226,11 +221,12 @@ if __name__ == '__main__':
         #args.project = 'ssda_mme-addnl_scripts'
         args.project = 'PAC_pretrain'
         entity = 'morales97'
-    wandb.init(name=args.expt_name, dir=args.save_dir,
-               config=args, reinit=True, project=args.project, entity=entity)
-    main(args, wandb)
+    #wandb.init(name=args.expt_name, dir=args.save_dir,
+    #           config=args, reinit=True, project=args.project, entity=entity)
+    # main(args, wandb)
+    main(args)
 
-    wandb.join()
+    #wandb.join()
 
 # python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=101 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=resnet_seg --ckpt_freq=1 --pre_trained=True &
 # python addnl_scripts/pretrain/rot_pred.py --resume=expts/rot_pred/checkpoint_2000.pth.tar --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=no_pretrain --ckpt_freq=1 --pre_trained=False &
