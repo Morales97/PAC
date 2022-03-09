@@ -28,7 +28,7 @@ import random
 from torch.cuda.amp import GradScaler
 from torch.cuda.amp import autocast
 #import wandb
-from torchsummary import summary
+#from torchsummary import summary
 
 
 def validate(G, F2, loader_s, loader_t):
