@@ -27,7 +27,7 @@ import shutil
 import random
 from torch.cuda.amp import GradScaler
 from torch.cuda.amp import autocast
-import wandb
+#import wandb
 from torchsummary import summary
 
 
@@ -226,12 +226,12 @@ if __name__ == '__main__':
         #args.project = 'ssda_mme-addnl_scripts'
         args.project = 'PAC_pretrain'
         entity = 'morales97'
-    wandb.init(name=args.expt_name, dir=args.save_dir,
-               config=args, reinit=True, project=args.project, entity=entity)
+    #wandb.init(name=args.expt_name, dir=args.save_dir,
+    #           config=args, reinit=True, project=args.project, entity=entity)
     main(args, wandb)
 
-    wandb.join()
+    #wandb.join()
 
-# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=601 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=resnet_seg --ckpt_freq=1 --pre_trained=True &
+# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=101 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=resnet_seg --ckpt_freq=1 --pre_trained=True &
 # python addnl_scripts/pretrain/rot_pred.py --resume=expts/rot_pred/checkpoint_2000.pth.tar --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=no_pretrain --ckpt_freq=1 --pre_trained=False &
 
