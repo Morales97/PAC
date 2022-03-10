@@ -124,6 +124,8 @@ def get_parser():
     # DM
     parser.add_argument('--pre_trained', type=boolfromstr, default=True,
                         help='Use IN pretrained weights')
+    parser.add_argument('--resnet_seg', type=boolfromstr, default=False,
+                        help='Use modified resnet architecture for segmentation')
 
     return parser
 

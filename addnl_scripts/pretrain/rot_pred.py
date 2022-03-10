@@ -71,8 +71,12 @@ def main(args, wandb):
 
     # Training settings
     if args.net == 'resnet34':
-        #G = resnet34(pretrained=args.pre_trained)
-        G = resnet34_seg(pretrained=args.pre_trained)
+        if not args.resnet_seg:
+            print('Using ResNet34 (standard)')
+            G = resnet34(pretrained=args.pre_trained)
+        else:
+            print('Using ResNet34_Seg')
+            G = resnet34_seg(pretrained=args.pre_trained)
         # num input channels/input dim
         inc = 512
     elif args.net == 'alexnet':
@@ -232,6 +236,6 @@ if __name__ == '__main__':
 
     wandb.join()
 
-# python addnl_scripts/pretrain/rot_pred.py --batch_size=16 --steps=101 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=resnet_seg --ckpt_freq=1 --pre_trained=True &
+# python addnl_scripts/pretrain/rot_pred.py --resnet_seg=True --batch_size=1 --steps=101 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=resnet_seg --ckpt_freq=1 --pre_trained=True --log_interval=1 &
 # python addnl_scripts/pretrain/rot_pred.py --resume=expts/rot_pred/checkpoint_2000.pth.tar --batch_size=16 --steps=5001 --dataset=multi --source=real --target=sketch --save_dir=expts/rot_pred --expt_name=no_pretrain --ckpt_freq=1 --pre_trained=False &
 
