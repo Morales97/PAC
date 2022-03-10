@@ -71,8 +71,8 @@ def main(args, wandb):
 
     # Training settings
     if args.net == 'resnet34':
-        G = resnet34(pretrained=args.pre_trained)
-        #G = resnet34_seg(pretrained=args.pre_trained)
+        #G = resnet34(pretrained=args.pre_trained)
+        G = resnet34_seg(pretrained=args.pre_trained)
         # num input channels/input dim
         inc = 512
     elif args.net == 'alexnet':
